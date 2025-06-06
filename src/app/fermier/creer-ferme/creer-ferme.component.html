@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer une Ferme - Smart Bee Home</title>
+  <style>
+    :root {
+      --primary-color: #4a6fa5;
+      --secondary-color: #ffa630;
+      --dark-color: #166088;
+      --light-color: #dbe9ee;
+      --error-color: #ff4e4e;
+      --success-color: #28a745;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    }
+
+    .farm-container {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .farm-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .bee-icon {
+      margin-bottom: 20px;
+    }
+
+    .bee-icon svg {
+      width: 50px;
+      height: 50px;
+      fill: var(--secondary-color);
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .fermier-info {
+      background: linear-gradient(135deg, rgba(74, 111, 165, 0.1), rgba(255, 166, 48, 0.1));
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 25px;
+      border-left: 4px solid var(--secondary-color);
+    }
+
+    .fermier-info h3 {
+      color: var(--primary-color);
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .fermier-info p {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .required:after {
+      content: " *";
+      color: var(--error-color);
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background-color: #f8f9fa;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+      background-color: white;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 20px;
+      padding-right: 40px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-suffix {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--dark-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-size: 14px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .success-message {
+      background-color: rgba(40, 167, 69, 0.1);
+      color: var(--success-color);
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--success-color);
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @media (max-width: 600px) {
+      .farm-container {
+        padding: 30px 20px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="farm-container">
+  <div class="header">
+    <div class="bee-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M12,10C13.1,10 14,10.9 14,12C14,13.1 13.1,14 12,14C10.9,14 10,13.1 10,12C10,10.9 10.9,10 12,10M12,16C10.9,16 10,16.9 10,18C10,19.1 10.9,20 12,20C13.1,20 14,19.1 14,18C14,16.9 13.1,16 12,16M20,6C21.1,6 22,6.9 22,8C22,9.1 21.1,10 20,10C18.9,10 18,9.1 18,8C18,6.9 18.9,6 20,6M16,10C17.1,10 18,10.9 18,12C18,13.1 17.1,14 16,14C14.9,14 14,13.1 14,12C14,10.9 14.9,10 16,10M8,10C9.1,10 10,10.9 10,12C10,13.1 9.1,14 8,14C6.9,14 6,13.1 6,12C6,10.9 6.9,10 8,10M4,6C5.1,6 6,6.9 6,8C6,9.1 5.1,10 4,10C2.9,10 2,9.1 2,8C2,6.9 2.9,6 4,6M12,4C11.4,4 11,4.4 11,5V7C11,7.6 11.4,8 12,8C12.6,8 13,7.6 13,7V5C13,4.4 12.6,4 12,4M20,8C19.4,8 19,8.4 19,9V11C19,11.6 19.4,12 20,12C20.6,12 21,11.6 21,11V9C21,8.4 20.6,8 20,8M4,8C3.4,8 3,8.4 3,9V11C3,11.6 3.4,12 4,12C4.6,12 5,11.6 5,11V9C5,8.4 4.6,8 4,8M8,12C7.4,12 7,12.4 7,13V15C7,15.6 7.4,16 8,16C8.6,16 9,15.6 9,15V13C9,12.4 8.6,12 8,12M16,12C15.4,12 15,12.4 15,13V15C15,15.6 15.4,16 16,16C16.6,16 17,15.6 17,15V13C17,12.4 16.6,12 16,12M12,16C11.4,16 11,16.4 11,17V19C11,19.6 11.4,20 12,20C12.6,20 13,19.6 13,19V17C13,16.4 12.6,16 12,16Z"/>
+      </svg>
+    </div>
+    <h1>Créer une Ferme</h1>
+    <p class="subtitle">Ajoutez une nouvelle ferme à votre exploitation apicole</p>
+  </div>
+
+  <div class="success-message" id="successMessage">
+    ✅ Ferme créée avec succès !
+  </div>
+
+  <!-- Informations du fermier connecté -->
+  <div class="fermier-info" id="fermierInfo">
+    <h3>👤 Fermier connecté</h3>
+    <p id="fermierDetails">Chargement des informations...</p>
+  </div>
+
+  <form id="farmForm">
+    <div class="form-group">
+      <label for="nom" class="required">Nom de la ferme</label>
+      <input type="text" id="nom" name="nom" required placeholder="Ex: Ferme des Abeilles d'Or">
+      <div class="error-message" id="nomError">Le nom de la ferme est requis</div>
+    </div>
+
+    <div class="form-group">
+      <label for="superficie" class="required">Superficie</label>
+      <div class="input-group">
+        <input type="number" id="superficie" name="superficie" required min="0.1" step="0.1" placeholder="Ex: 2.5">
+        <span class="input-suffix">hectares</span>
+      </div>
+      <div class="error-message" id="superficieError">La superficie doit être supérieure à 0</div>
+    </div>
+
+    <div class="form-group">
+      <label for="siteApiculture" class="required">Site d'apiculture</label>
+      <select id="siteApiculture" name="siteApiculture" required>
+        <option value="">Sélectionnez un site...</option>
+        <option value="1">Site de Tunis - Zone Nord</option>
+        <option value="2">Site de Sfax - Zone Côtière</option>
+        <option value="3">Site de Kairouan - Zone Centrale</option>
+        <option value="4">Site de Bizerte - Zone Littorale</option>
+        <option value="5">Site de Gafsa - Zone Sud</option>
+        <option value="6">Site de Sousse - Zone Est</option>
+      </select>
+      <div class="error-message" id="siteError">Veuillez sélectionner un site d'apiculture</div>
+    </div>
+
+    <div class="button-group">
+      <button type="button" class="btn-secondary" onclick="resetForm()">Annuler</button>
+      <button type="submit" class="btn-primary">Créer la ferme</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Simuler des données de fermier pour le localStorage
+  function initializeFermierData() {
+    if (!localStorage.getItem('fermier')) {
+      const defaultFermier = {
+        id: 1,
+        nom: "Dupont",
+        prenom: "Jean",
+        email: "jean.dupont@email.com",
+        phone: "+216 98 123 456"
+      };
+      localStorage.setItem('fermier', JSON.stringify(defaultFermier));
+    }
+  }
+
+  // Charger et afficher les informations du fermier
+  function loadFermierInfo() {
+    const fermierData = localStorage.getItem('fermier');
+    const fermierDetails = document.getElementById('fermierDetails');
+
+    if (fermierData) {
+      const fermier = JSON.parse(fermierData);
+      fermierDetails.innerHTML = `${fermier.prenom} ${fermier.nom} - ${fermier.email}`;
+    } else {
+      fermierDetails.innerHTML = 'Aucun fermier connecté';
+      document.getElementById('fermierInfo').style.display = 'none';
+    }
+  }
+
+  // Valider le formulaire
+  function validateForm() {
+    let isValid = true;
+
+    // Validation du nom
+    const nom = document.getElementById('nom').value.trim();
+    const nomError = document.getElementById('nomError');
+    if (!nom) {
+      nomError.style.display = 'block';
+      isValid = false;
+    } else {
+      nomError.style.display = 'none';
+    }
+
+    // Validation de la superficie
+    const superficie = parseFloat(document.getElementById('superficie').value);
+    const superficieError = document.getElementById('superficieError');
+    if (!superficie || superficie <= 0) {
+      superficieError.style.display = 'block';
+      isValid = false;
+    } else {
+      superficieError.style.display = 'none';
+    }
+
+    // Validation du site
+    const site = document.getElementById('siteApiculture').value;
+    const siteError = document.getElementById('siteError');
+    if (!site) {
+      siteError.style.display = 'block';
+      isValid = false;
+    } else {
+      siteError.style.display = 'none';
+    }
+
+    return isValid;
+  }
+
+  // Réinitialiser le formulaire
+  function resetForm() {
+    document.getElementById('farmForm').reset();
+    document.querySelectorAll('.error-message').forEach(error => {
+      error.style.display = 'none';
+    });
+    document.getElementById('successMessage').style.display = 'none';
+  }
+
+  // Gérer la soumission du formulaire
+  document.getElementById('farmForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    // Récupérer les données du fermier depuis localStorage
+    const fermierData = localStorage.getItem('fermier');
+    if (!fermierData) {
+      alert('Erreur: Aucun fermier connecté');
+      return;
+    }
+
+    const fermier = JSON.parse(fermierData);
+
+    // Créer l'objet ferme
+    const fermeData = {
+      nom: document.getElementById('nom').value.trim(),
+      superficie: parseFloat(document.getElementById('superficie').value),
+      siteApiculture: {
+        id: parseInt(document.getElementById('siteApiculture').value)
+      },
+      fermier: fermier
+    };
+
+    // Simuler l'envoi au backend
+    console.log('Données de la ferme à envoyer:', fermeData);
+
+    // Afficher le message de succès
+    const successMessage = document.getElementById('successMessage');
+    successMessage.style.display = 'block';
+    successMessage.classList.add('fade-in');
+
+    // Réinitialiser le formulaire après un délai
+    setTimeout(() => {
+      resetForm();
+    }, 2000);
+
+    // Ici, vous pourrez ajouter l'appel AJAX vers votre backend
+    /*
+    fetch('/api/fermes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(fermeData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Ferme créée:', data);
+      // Gérer la réponse du serveur
+    })
+    .catch(error => {
+      console.error('Erreur:', error);
+    });
+    */
+  });
+
+  // Initialiser la page
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeFermierData();
+    loadFermierInfo();
+  });
+</script>
+</body>
+</html>
