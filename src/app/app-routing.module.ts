@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: '', component: SignInComponent},
   {path: 'signin', component: SignInComponent},
   {path: 'signup', component: SignUpComponent, data: { title: 'Créer un compte' }},
-  {path: 'fermier', component: DashboardFermierComponent},
+  {path: 'fermier', loadChildren: () => import('./fermier/fermier.module').then(m => m.FermierModule)},
 ];
 
 @NgModule({
