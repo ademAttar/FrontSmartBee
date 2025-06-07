@@ -1,0 +1,70 @@
+.liste-fermes-container {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.fermes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #5a4d00; /* marron foncé pour texte */
+  box-shadow: 0 2px 8px rgba(250, 230, 100, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff9db; /* fond jaune clair */
+}
+
+.fermes-table thead {
+  background-color: #f9d71c; /* jaune vif */
+  color: #4a3b00; /* marron foncé */
+  text-align: left;
+  user-select: none;
+  font-weight: 600;
+}
+
+.fermes-table th,
+.fermes-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #f7e88c;
+}
+
+.fermes-table tbody tr:hover {
+  background-color: #fff3a3; /* jaune clair sur hover */
+  cursor: pointer;
+}
+
+.fermes-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 6px;
+  user-select: none;
+  color: #4a3b00;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background-color: #f9d71c; /* jaune vif */
+  box-shadow: 0 2px 5px rgba(249, 215, 28, 0.5);
+}
+
+.edit-btn:hover {
+  background-color: #e1c913; /* jaune plus foncé */
+}
+
+.delete-btn {
+  background-color: #f2ba0f; /* jaune orangé */
+  box-shadow: 0 2px 5px rgba(242, 186, 15, 0.5);
+}
+
+.delete-btn:hover {
+  background-color: #c49e0b; /* jaune orangé plus foncé */
+}

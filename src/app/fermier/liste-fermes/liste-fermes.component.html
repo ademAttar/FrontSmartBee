@@ -1,1 +1,36 @@
-<p>liste-fermes works!</p>
+<div class="ferme-card">
+  <h2>📋 Liste des Fermes</h2>
+  <div class="liste-fermes-container">
+    <table class="fermes-table">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Site</th>
+        <th>Superficie</th>
+        <th>Fermier</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ferme of fermes">
+        <td>{{ ferme.id }}</td>
+        <td>{{ ferme.nom }}</td>
+        <td>{{ ferme.site }}</td>
+        <td>{{ ferme.superficie }} ha</td>
+        <td>
+          {{ferme.fermier}}
+        </td>
+        <td>
+          <button class="action-btn edit-btn" >
+            ✏️ Éditer
+          </button>
+          <button class="action-btn delete-btn" >
+            🗑️ Supprimer
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

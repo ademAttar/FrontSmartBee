@@ -6,6 +6,7 @@ import { CreerFermeComponent } from './creer-ferme/creer-ferme.component';
 import { ListeFermesComponent } from './liste-fermes/liste-fermes.component';
 import { DashboardFermierComponent } from './dashboard-fermier/dashboard-fermier.component';
 import { FermierHeaderComponent } from './fermier-header/fermier-header.component';
+import { MesFermesComponent } from './mes-fermes/mes-fermes.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { FermierHeaderComponent } from './fermier-header/fermier-header.componen
     CreerFermeComponent,
     ListeFermesComponent,
     DashboardFermierComponent,
-    FermierHeaderComponent
+    FermierHeaderComponent,
+    MesFermesComponent
   ],
   imports: [
     CommonModule,
