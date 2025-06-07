@@ -1,3 +1,9 @@
+/* Section Adjustments for Centering and Spacing */
+section.min-vh-100 {
+  padding-top: 5rem; /* Space from top */
+  padding-bottom: 6rem; /* Space for footer */
+}
+
 /* Honeycomb Background */
 .honeycomb-bg {
   position: absolute;
@@ -37,6 +43,7 @@
 .user-type-label {
   transition: all 0.2s ease;
   border: 1px solid rgba(255, 215, 0, 0.2);
+  cursor: pointer;
 }
 
 .user-type-label:hover {
@@ -44,11 +51,21 @@
   border-color: #ffa000;
 }
 
-.d-flex input {
-  margin-right: 10px;
-  width: 18px;
-  height: 18px;
+.user-type-label input {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
   accent-color: #ffc107;
+}
+
+.user-type-label span {
+  font-size: 16px;
+}
+
+/* Input Fields */
+.form-control-lg {
+  font-size: 18px;
+  padding: 12px 16px;
 }
 
 /* Fermier Fields */
@@ -107,17 +124,26 @@
 }
 
 /* Page Footer */
+.page-footer {
+  bottom: 1rem; /* Adjusted to ensure spacing */
+}
+
 .page-footer p {
   font-size: 0.8rem;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 576px) {
+  section.min-vh-100 {
+    padding-top: 3rem; /* Less top padding on mobile */
+    padding-bottom: 5rem; /* Ensure footer space */
+  }
+
   .page-footer p {
     font-size: 0.75rem;
   }
 
   .d-flex.flex-column.gap-2 {
-    gap: 10px;
+    gap: 8px;
   }
 }

@@ -21,13 +21,13 @@
       <div class="mb-4">
         <label class="form-label fw-semibold text-dark">Type d'utilisateur</label>
         <div class="d-flex flex-column gap-2 mb-3 pb-3 border-bottom">
-          <label class="d-flex align-items-center p-3 rounded bg-light user-type-label">
+          <label class="d-flex align-items-center p-2 rounded user-type-label">
             <input type="radio" name="userType" value="agent" [(ngModel)]="userType" (ngModelChange)="onUserTypeChange()">
-            <span class="ms-2">Agent</span>
+            <span class="ms-2 fw-medium">Agent</span>
           </label>
-          <label class="d-flex align-items-center p-3 rounded bg-light user-type-label">
+          <label class="d-flex align-items-center p-2 rounded user-type-label">
             <input type="radio" name="userType" value="fermier" [(ngModel)]="userType" (ngModelChange)="onUserTypeChange()">
-            <span class="ms-2">Fermier</span>
+            <span class="ms-2 fw-medium">Fermier</span>
           </label>
         </div>
       </div>
